@@ -5,6 +5,7 @@ import requests
 import concurrent.futures
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.by import By
 from pathlib import Path
 
 header.header()
@@ -29,7 +30,7 @@ for page_number in range(pages):
 	browser.set_window_size(200,200)
 	browser.get('https://www.pexels.com/search/' + query +'/?page='+str(page_number))
 	print('Scraping URLs in page {} from a total of {} pages.'.format(str(page_number+1), str(pages)))
-	links = browser.find_elements_by_xpath('//*[@href]')
+	links = browser.find_elements(By.XPATH,'//*[@href]')
 	for link in links:
 		images_list.append(link.get_attribute('href'))
 	time.sleep(0.6)
